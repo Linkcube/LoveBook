@@ -1,0 +1,36 @@
+
+Hi there, I'm a character
+--Conf
+	Character Bill move middle
+	Character Bill show
+	Background bg1 set
+	Music music play
+	Music music volume .5
+--Conf
+See here this is a lot of text, hopefully this will get wrapped aronud and not be horrible to look at!
+--Clear
+New text
+--Conf
+	Character Bill move right
+	Character Bill pose flip
+--Conf
+He moved
+--Clear
+Clean.
+--Conf
+	Character Bill move left
+	Sound effect play
+--Conf
+--Clear
+Left!
+--Clear
+--Conf
+	Character Bill move middle
+--Conf
+--Clear
+Middle!!
+--Clear
+--Conf
+	Character Bill hide
+	Music music stop
+--Conf

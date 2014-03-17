@@ -1,0 +1,10 @@
+-- Initialize game assets
+setResolution 1024 720
+setTitle VN Test
+Character Bill char.png
+Background bg1 bg1.png
+Character Bill addPose flip revChar.png
+Sound effect effect.mp3
+Music music music.mp3
+Font size 26
+VoiceTable \Voices\

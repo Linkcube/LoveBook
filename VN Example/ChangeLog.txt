@@ -1,0 +1,12 @@
+V1.0 TBA
+
+To do:
+Multiple images per character [x]
+Fade transitions [x] # Smoothe as silk
+Sound [x]
+Text wrapping [x]
+Font support [x]
+Standardising []
+Automatic playing []
+Speech stack [~] # got the load in, called voiceTable
+Progressive text []
