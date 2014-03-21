@@ -20,6 +20,8 @@ local toShow = {}
 local voiceTable = {}
 local voicePos = 1
 local voicePlay = false
+local sX = 1
+local sY = 1
 
  local Character = class('Character')
 function Character:initialize(name, imagePath)
@@ -85,6 +87,8 @@ function computeScript()
 		-- Backgrounds
 		elseif lineS[0] == "Background" then
 			if lineS[2] == "set" then
+				sX = width / backgrounds[lineS[1]]:getWidth()
+				sY = height /  backgrounds[lineS[1]]:getHeight()
 				bg = backgrounds[lineS[1]]
 			end
 			if lineS[1] == "remove" then
@@ -124,6 +128,7 @@ function love.load()
 			end
 		elseif lineS[0] == "Background" then
 			backgrounds[lineS[1]] = love.graphics.newImage(lineS[2])
+			backgrounds[lineS[1]]:setFilter("nearest","nearest", 16)
 		elseif lineS[0] == "setResolution" then
 			success = love.window.setMode(lineS[1], lineS[2])
 		elseif lineS[0] == "setTitle" then
@@ -234,7 +239,7 @@ function love.draw()
 	-- If there is a background then draw it
 	if bg ~= nil then
 		love.graphics.setColor(br, br, br, 255)
-		love.graphics.draw(bg, 0, 0)
+		love.graphics.draw(bg, 0, 0, 0, sX, sY)
 		love.graphics.setColor(255, 255, 255, 255)
 	end
 	for character,k in pairs(characters) do

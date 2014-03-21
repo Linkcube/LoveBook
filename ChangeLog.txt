@@ -7,6 +7,7 @@ Sound [x]
 Text wrapping [x]
 Font support [x]
 Standardising []
-Automatic playing []
+Automatic playing [-] # Canceled for the forseeable future
 Speech stack [~] # got the load in, called voiceTable
-Progressive text []
+Progressive text [-] # Cancled for the forseeable future
+Scale Backgrounds [x]
