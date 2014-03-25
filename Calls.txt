@@ -54,6 +54,7 @@ Plain text
 	ex:
 		normal text
 		--Conf
+			...
 			code here (tab not required)
 		--Conf
 		back to text
