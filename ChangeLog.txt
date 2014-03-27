@@ -2,12 +2,12 @@ V1.0 TBA
 
 To do:
 Multiple images per character [x]
-Fade transitions [x] # Smoothe as silk
+Fade transitions [x]
 Sound [x]
 Text wrapping [x]
 Font support [x]
 Standardising []
-Automatic playing [-] # Canceled for the forseeable future
-Speech stack [~] # got the load in, called voiceTable
-Progressive text [-] # Cancled for the forseeable future
+Automatic playing []
+Speech stack [x] # got the load in, called voiceTable, not tested
+Progressive text [x]
 Scale Backgrounds [x]

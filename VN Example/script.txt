@@ -1,5 +1,6 @@
 
 Hi there, I'm a character
+Really long string should be split really badly, like you know, multiple times. But i guess not cuz thats jsut how it is.. yea this is long
 --Conf
 	Character Bill move middle
 	Character Bill show
