@@ -29,11 +29,12 @@ local sY = 1 -- The scale coefficient of the y-dimension of the background
 local click = 0
 local Font = love.graphics.newFont(12)
 local oldTxt = 1
+local notNil = 1
 
---[
+--[[
 --The character class for characters to be drawn, known by a name and given various values for different modifications
 --caused by functions later detailed
---]
+--]]
  local Character = class('Character')
 function Character:initialize(name, imagePath)
 	self.poses = {}
@@ -46,30 +47,30 @@ function Character:initialize(name, imagePath)
 	self.fade = 0 -- The direction to fade, 0 = no fade actoin
 end
 
---[
+--[[
 --Adds a 'pose'; another image that can be drawn in the character's place
 --@param pose The name for the pose to be called from in the character's pose table
 --@param path The image path for the pose to point to
---]
+--]]
 function Character:addPose(pose, path)
 	self.poses[pose] = love.graphics.newImage(path)
 end
 
---[
+--[[
 --Draws a character at the alpha of the character
 --@param pick The character in the characters table to use
---]
+--]]
 function draw(pick)
 	love.graphics.setColor(br, br, br, characters[pick].alpha)
 	love.graphics.draw(characters[pick].image, characters[pick].x, characters[pick].y)
 	love.graphics.setColor(br, br, br, 255)
 end
 
---[
+--[[
 --Moves a character to a select position
 --@param chr The character to move
 --@param pos The position (left, right, middle) to move to the character
---]
+--]]
 function Move(chr, pos)
 	characters[chr].y = height - characters[chr].image:getHeight()
 	if pos == "right" then
@@ -81,18 +82,18 @@ function Move(chr, pos)
 	end
 end
 
---[
+--[[
 --Initializes the sequence for text to fade in, and wraps the text
---]
+--]]
 function printInit()
 	local space = 0
 	local tmpLength = 0
 	txtMax = oldTxt
 	txtLimit = width * .7
 	for j=oldTxt+1, string.len(txtDisplay) do
-		txtAlpha[j] = 0
 		ch = string.sub(txtDisplay, j, j)
 		txtMax = txtMax + 1
+		txtAlpha[txtMax] = 0
 		txtTable[txtMax] = ch
 		tmpLength = tmpLength + Font:getWidth(txtTable[txtMax])
 		if tmpLength > txtLimit then -- If the line goes over the limit, go back to last space and make it a line break
@@ -109,9 +110,9 @@ function printInit()
 	txtAlpha[1] = 1
 end
 
---[
+--[[
 --Prints out the txtTable
---]
+--]]
 function Print()
 	local x = width * .15
 	local y = 0
@@ -129,11 +130,11 @@ function Print()
 	end
 end
 
---[
+--[[
 --Splits a string into words
 --@param s The string to split
 --@return The table of words from 0,...length-1
---]
+--]]
 function lineSplit(s)
 	split = {}
 	o = 0
@@ -292,15 +293,15 @@ function love.update(dt)
 			end
 		end
 	end
-	--if txtTable[txtMax-1].alpha == 255 then click = 1 end -- If all text is shown, player click should move to new line
+	if txtAlpha[txtMax] == 255 then click = 1 end -- If all text is shown, player click should move to new line
 end
 
---[
+--[[
 --Takes user input as moving onto the next chunk of text
 --@param x The x-pos of the mouse
 --@param y The y-pos of the mouse
 --@button Which button is being pressed
---]
+--]]
 function love.mousepressed(x, y, button)
 	if inpt == true and button == 'l' then
 		if click == 0 then

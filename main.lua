@@ -29,6 +29,7 @@ local sY = 1 -- The scale coefficient of the y-dimension of the background
 local click = 0
 local Font = love.graphics.newFont(12)
 local oldTxt = 1
+local notNil = 1
 
 --[[
 --The character class for characters to be drawn, known by a name and given various values for different modifications
@@ -90,9 +91,9 @@ function printInit()
 	txtMax = oldTxt
 	txtLimit = width * .7
 	for j=oldTxt+1, string.len(txtDisplay) do
-		txtAlpha[j] = 0
 		ch = string.sub(txtDisplay, j, j)
 		txtMax = txtMax + 1
+		txtAlpha[txtMax] = 0
 		txtTable[txtMax] = ch
 		tmpLength = tmpLength + Font:getWidth(txtTable[txtMax])
 		if tmpLength > txtLimit then -- If the line goes over the limit, go back to last space and make it a line break
@@ -292,7 +293,7 @@ function love.update(dt)
 			end
 		end
 	end
-	--if txtTable[txtMax-1].alpha == 255 then click = 1 end -- If all text is shown, player click should move to new line
+	if txtAlpha[txtMax] == 255 then click = 1 end -- If all text is shown, player click should move to new line
 end
 
 --[[
