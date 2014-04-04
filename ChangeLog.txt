@@ -1,13 +1,26 @@
 V1.0 TBA
 
 To do:
+##Completed##
 Multiple images per character [x]
 Fade transitions [x]
 Sound [x]
 Text wrapping [x]
 Font support [x]
-Standardising []
-Automatic playing []
-Speech stack [x] # got the load in, called voiceTable, not tested
 Progressive text [x]
 Scale Backgrounds [x]
+
+##Bugged/Partly working##
+Speech stack [x] # got the load in, called voiceTable, not tested
+Menu/State system [] # further functionality and programability to be added
+
+##Not done##
+Standardising []
+Automatic playing []
+Save/Load []
+Shaders [?]
+Slide move []
+Advanced commands []
+In-game options []
+Multiple paths []
+UI, alternate text and color schemes []
