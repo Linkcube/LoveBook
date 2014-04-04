@@ -1,9 +1,31 @@
--- Disclaimer: All software is provided as is, with no expectations. All rights are reserved by respective owners (love2d et al) as well as by the writer of this code, and all conditions of use can be changed on a whim without notification.
--- With the above line in consideration, you may distribute this code along with your script.txt and init.txt, but let the creator know of this (he would like to know when someone has used this ;) ) 
+--------------------------------------------------------------------------------
+-- The MIT License (MIT)
+
+-- Copyright (c) 2014 Andrew Jon Yobs
+
+-- Permission is hereby granted, free of charge, to any person obtaining a copy
+-- of this software and associated documentation files (the "Software"), to deal
+-- in the Software without restriction, including without limitation the rights
+-- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+-- copies of the Software, and to permit persons to whom the Software is
+-- furnished to do so, subject to the following conditions:
+
+-- The above copyright notice and this permission notice shall be included in
+-- all copies or substantial portions of the Software.
+
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+-- THE SOFTWARE.
+
+--------------------------------------------------------------------------------
 -- Visual Novel,Love Book
--- Requires middleclass, may switch over to sunclass later
+-- Requires sunclass
 -- Read first part of file and load characters/backgrounds/sounds into classes/lists and load in the load function
-local class = require 'middleclass' -- oop functionality
+local class = require 'sunclass' -- oop functionality
 local cLine = 0 -- The current line being read from
 local txtDisplay = "" -- The text to display, soon to be changed
 local txtLimit = 0 -- The pixel width of text before wrapping
@@ -29,7 +51,6 @@ local sY = 1 -- The scale coefficient of the y-dimension of the background
 local click = 0
 local Font = love.graphics.newFont(12)
 local oldTxt = 1
-local notNil = 1
 
 --[[
 --The character class for characters to be drawn, known by a name and given various values for different modifications
@@ -60,9 +81,9 @@ end
 --Draws a character at the alpha of the character
 --@param pick The character in the characters table to use
 --]]
-function draw(pick)
-	love.graphics.setColor(br, br, br, characters[pick].alpha)
-	love.graphics.draw(characters[pick].image, characters[pick].x, characters[pick].y)
+function Character:Draw()
+	love.graphics.setColor(br, br, br, self.alpha)
+	love.graphics.draw(self.image, self.x, self.y)
 	love.graphics.setColor(br, br, br, 255)
 end
 
@@ -71,14 +92,14 @@ end
 --@param chr The character to move
 --@param pos The position (left, right, middle) to move to the character
 --]]
-function Move(chr, pos)
-	characters[chr].y = height - characters[chr].image:getHeight()
+function Character:Move(pos)
+	self.y = height - self.image:getHeight()
 	if pos == "right" then
-		characters[chr].x = (.8 * width) - characters[chr].image:getWidth()
+		self.x = (.8 * width) - self.image:getWidth()
 	elseif pos == "left" then
-		characters[chr].x = .2 * width
+		self.x = .2 * width
 	elseif pos == "middle" then
-		characters[chr].x = (width/2) - (characters[chr].image:getWidth()/2)
+		self.x = (width/2) - (self.image:getWidth()/2)
 	end
 end
 
@@ -145,7 +166,9 @@ function lineSplit(s)
 	return split
 end
 
--- Interperets called for computing a script block that isn't simply adding text
+--[[
+-- Interprets called for computing a script block that isn't simply adding text
+--]]
 function computeScript()
 	cLine = cLine + 1
 	while line[cLine] ~= "--Conf" do
@@ -154,7 +177,7 @@ function computeScript()
 		-- Characters
 		if lineS[0] == "Character" then
 			if lineS[2] == "move" then
-				Move(lineS[1],lineS[3])
+				characters[lineS[1]]:Move(lineS[3])
 			elseif lineS[2] == "show" then
 				characters[lineS[1]].fade = 1
 				--characters[lineS[1]].alpha = 255
@@ -211,8 +234,8 @@ function love.load()
 		elseif lineS[0] == "setResolution" then
 			success = love.window.setMode(lineS[1], lineS[2])
 		elseif lineS[0] == "setTitle" then
+			love.window.setTitle(string.sub(ls, 10))
 		-- Sound
-			love.window.setTitle(string.sub(ls, 12, 0))
 		elseif lineS[0] == "Sound" then
 		-- Music
 			sounds[lineS[1]] = love.audio.newSource(lineS[2], "static")
@@ -242,7 +265,6 @@ function love.load()
 	lineCount = cLine
 	cLine = 0
 	txtDisplay = line[0]
-	intp = true
 end
 
 function love.update(dt)
@@ -361,8 +383,8 @@ function love.draw()
 		love.graphics.draw(bg, 0, 0, 0, sX, sY)
 		love.graphics.setColor(255, 255, 255, 255)
 	end
-	for character,k in pairs(characters) do
-		draw(character)
+	for k,character in pairs(characters) do
+		character:Draw()
 	end
 	Print()
 	--love.graphics.print(cLine, 400, 100)
