@@ -115,6 +115,17 @@ Sound name volume #
 	Clears the current text to display
 	ex: --Clear
 
+####
+menu.txt
+
+Plain text
+	Will be printed out to the screen, would be much cleaner to do this with a picture through the button system, but here is a simple option. Will use the font loaded in the init.txt
+
+Button add x y name \path\to\image.png
+	Will create a button (image) using the path provided, and at the x,y coordinates described. The name will never be displayed, but is used for interals such as pointing to actions to be taken when clicked (such as go to the game)
+	ex: Button add 200 160 Start char.png
+	Note: as of now, only Start will do anything (begin the game) but later on there will be more known-names such as options etc. Feel free to hack in your own by looking at the menu.lua file
+
 Notes:
 
 When there is text on the screen the rest of the screen will be dimmed for easier reading for the viewer, however
@@ -124,3 +135,7 @@ The music will automatically loop unless otherwise specified
 
 Sounds are stored in memory, please do not use this for voices if you are planning on voicing more than a couple lines,
 instead use the voice stack (soon to be implemented) as it will be easier to handle as well as be more efficient.
+
+When going to the menu, all music and sounds are paused, and resumed upon leaving it.
+
+Pressing the 'r' key will re-load all assets for easy testing, will be changed to a debug/development toggle later on.

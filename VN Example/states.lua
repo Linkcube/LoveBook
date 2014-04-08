@@ -1,6 +1,7 @@
 class = require("sunclass") -- try out using sunclass from 'qwook'
 reader = require('reader')
 menu = require('menu')
+buttons = require('buttons')
 GameStatesClass = class("GameStatesClass")
 
 function GameStatesClass:initialize()

@@ -1,4 +1,3 @@
--- Test
 --------------------------------------------------------------------------------
 -- The MIT License (MIT)
 
@@ -25,7 +24,6 @@
 --------------------------------------------------------------------------------
 -- Visual Novel,Love Book
 -- Requires sunclass
--- Read first part of file and load characters/backgrounds/sounds into classes/lists and load in the load function
 local class = require 'sunclass' -- oop functionality
 local cLine = 0 -- The current line being read from
 local txtDisplay = "" -- The text to display, soon to be changed
@@ -49,10 +47,10 @@ local voicePos = 1 -- The voice file of voiceTable to play
 local voicePlay = false -- Whether voice files should be played or not
 local sX = 1 -- The scale coefficient of the x-dimension of the background
 local sY = 1 -- The scale coefficient of the y-dimension of the background
-local click = 0
-local Font = love.graphics.newFont(12)
-local oldTxt = 1
-Reader = {}
+local click = 0 -- Click progression the player is at
+local Font = love.graphics.newFont(12) -- Default font
+local oldTxt = 1 -- Index to ignore when printing
+Reader = {} -- The state to be put onto the GameStates stack
 
 --[[
 --The character class for characters to be drawn, known by a name and given various values for different modifications
@@ -222,6 +220,31 @@ function Reader:computeScript()
 end
 
 function Reader:Load()
+	cLine = 0 -- The current line being read from
+	txtDisplay = "" -- The text to display, soon to be changed
+	txtLimit = 0 -- The pixel width of text before wrapping
+	txtTable = {} -- The table to hold characters for fading in text
+	txtAlpha = {} -- Table for alpha values of txtTable
+	txtMax = 0 -- The highest count of characters in txtTable
+	bg = nil -- The background to be drawn
+	characters = {} -- The table of characters in the vn
+	backgrounds = {} -- The table of backgrounds in the vn
+	width, height = love.graphics.getDimensions() -- The initial height and width of the scren, is changed after loading in init.txt
+	line = {} -- The table of lines loaded from files
+	br = 255 -- The 'brightness' of to draw non-text
+	musics = {} -- The table of music to be played
+	sounds = {} -- The table of sounds to be played
+	inpt = true -- Whether the user input will be taken into account
+	toFade = {} -- The table of characters to fade alpha values
+	toShow = {} -- The table of characters to fade in alpha values
+	voiceTable = {} -- The table of sound files dedicated to voices
+	voicePos = 1 -- The voice file of voiceTable to play
+	voicePlay = false -- Whether voice files should be played or not
+	sX = 1 -- The scale coefficient of the x-dimension of the background
+	sY = 1 -- The scale coefficient of the y-dimension of the background
+	click = 0 -- Click progression the player is at
+	Font = love.graphics.newFont(12) -- Default font
+	oldTxt = 1 -- Index to ignore when printing
 	for ls in love.filesystem.lines("init.txt") do -- load assets
 		lineS = Reader:lineSplit(ls)
 		if lineS[0] == "Character" then
@@ -268,24 +291,10 @@ function Reader:Load()
 	lineCount = cLine
 	cLine = 0
 	txtDisplay = line[0]
+	click = 1
 end
 
 function Reader:Update(dt)
-	-- when player input of mouse/enter/space go to next block of script
-	if love.keyboard.isDown("r") then -- restart
-		cLine = 0
-		txtDisplay = ""
-		drawableBg = {}
-		characters = {}
-		txtTable = {}
-		oldTxt = 1
-		txtAlpha =  {}
-		bg = nil
-		line = {}
-		br = 255
-		love.audio.stop()
-		Reader:Load()
-	end
 	-- Fade out action, done in update to make it gradual
 	for k,character in pairs(characters) do
 		if character.fade == -1 then

@@ -14,6 +14,16 @@ function love.mousepressed(x, y, button)
 	GameStates.states[GameStates.current]:Click(x, y, button)
 end
 
+function love.keypressed(key, isrepeat) -- Clean restart, clears all assets
+	if key == 'r' then
+		GameStates:Pop()
+		package.loaded.states = nil
+		states = require "states"
+		GameStates:Push(Reader)
+		GameStates:Push(Menu)
+	end
+end
+	
 function love.draw()
 	GameStates.states[GameStates.current]:Draw()
 end

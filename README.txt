@@ -6,6 +6,7 @@ Included in the github repository are the following files:
 - reader.lua
 - states.lua
 - Calls.txt
+- menu.txt
 - ChangeLog.txt
 - VN Example
 
@@ -22,3 +23,6 @@ Contains different changes (later to be handled by github) but more importantly 
 To make use of this code you will need to have the included lua files, either sunclass.lua or middleclass.lua, and a script.txt and init.txt, the latter 2 you will be writing. 
 
 Please read through the example folder to get a basic idea of how to use this, then read through the calls.txt for more detailed information.
+
+# In-game Command - The key 'R'
+This will reload all assets for quick testing so that you don't need to re-run the lua code for changes... anywhere (except the main.lua)
