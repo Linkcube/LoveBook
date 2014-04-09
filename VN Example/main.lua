@@ -16,6 +16,7 @@ end
 
 function love.keypressed(key, isrepeat) -- Clean restart, clears all assets
 	if key == 'r' then
+		love.audio.stop()
 		GameStates:Pop()
 		package.loaded.states = nil
 		states = require "states"

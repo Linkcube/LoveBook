@@ -10,26 +10,26 @@ setTitle s
 	Sets the title of the window to a string, can include spaces
 	ex: setTitle My first VN!
 
-Character name \path\to\image.png
+Character name path/to/image.png
 	Creates a charater with using name and has the image specified as their default image to draw
-	ex: Character Lemon \characters\lemon\default.png
+	ex: Character Lemon characters/lemon/default.png
 
-Character name addPose pose \path\to\image.png
+Character name addPose pose path/to/image.png
 	Adds a pose to the specified character (pose names the pose) with the image of the path
-	ex: Character Lemon addPose awesome \characters\lemon\awesome.jpeg
+	ex: Character Lemon addPose awesome characters/lemon/awesome.jpeg
 
-Background name \path\to\bg.png
+Background name path/to/bg.png
 	Adds a background name name with the image specified
-	ex: Background sunnyDay \backgrounds\mountains\sunny.png
+	ex: Background sunnyDay backgrounds/mountains/sunny.png
 
-Sound name \path\to\sound.ogg
+Sound name path/to/sound.ogg
 	Adds a sound with name, can use most any file type (wav/mp3/flac/etc). Use short/small files only for this
 	as if you load large files it can have performance problems, use music instead for those
-	ex: Sound zap \audio\sounds\zap.mp3
+	ex: Sound zap audio/sounds/zap.mp3
 
-Music name \path\to\music.wav
+Music name path/to/music.wav
 	Adds music with a name, will loop automatically, good for large files.
-	ex: Music bgm \audio\music\happy.wav
+	ex: Music bgm audio/music/happy.wav
 
 Font size #
 	Sets the font to # size
@@ -37,7 +37,7 @@ Font size #
 
 VoiceTable dir
 	Creates the voice table from all files in dir, will play one sound file per text input, automatically turns on voice speech per line
-	ex: VoiceTable \voices\
+	ex: VoiceTable voices
 
 ######
 

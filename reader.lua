@@ -275,8 +275,7 @@ function Reader:Load()
 		-- Voice Table
 		elseif lineS[0] == "VoiceTable" then
 			for title, dir in pairs(love.filesystem.getDirectoryItems(lineS[1])) do
-				voiceTable[voicePos] = dir
-				voicePos = voicePos
+				voiceTable[title] = love.audio.newSource(lineS[1].."/"..dir, "stream")
 			end
 			voicePlay = true
 			voicePos = 1
@@ -361,8 +360,8 @@ function Reader:Click(x, y, button)
 			click = 0
 			-- Voice Cancel/Refresh
 			if voicePlay then
-				voiceTable[voicePos-1]:stop()
-				voiceTable[voicePos]:play()
+				if voiceTable[voicePos-1] ~= nil then voiceTable[voicePos-1]:stop() end
+				if voiceTable[voicePos] ~= nil then voiceTable[voicePos]:play() end
 				voicePos = voicePos + 1
 			end
 			-- Start traversing the next chunk of lines
