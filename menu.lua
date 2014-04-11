@@ -12,6 +12,9 @@ function Menu:Click(x, y, button)
 					for key, val in pairs(musics) do
 						if val:isPaused() then val:resume() end
 					end
+					if voicePlay then
+						voiceTable[voicePos]:resume()
+					end
 					GameStates:Pop()
 				end
 			end
@@ -42,6 +45,9 @@ function Menu:Draw()
 	love.graphics.setColor(r, g, b, a)
 end
 
+function Menu:KeyPress(key, isrepeat)
+end
+
 function Menu:Load()
 	Menu.buttons = {}
 	local buttonCount = 1
@@ -61,5 +67,8 @@ function Menu:Load()
 	end
 	for k, v in pairs(musics) do
 		if v:isPlaying() then v:pause() end
+	end
+	if voicePlay == true then
+		if voiceTable[voicePos]:isPlaying() then voiceTable[voicePos]:pause() end
 	end
 end

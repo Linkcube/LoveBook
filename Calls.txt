@@ -10,6 +10,10 @@ setTitle s
 	Sets the title of the window to a string, can include spaces
 	ex: setTitle My first VN!
 
+setIcon path/to/image.png
+	Sets the window's icon to a specific icon
+	ex: setIcon myIco.png
+
 Character name path/to/image.png
 	Creates a charater with using name and has the image specified as their default image to draw
 	ex: Character Lemon characters/lemon/default.png
@@ -108,6 +112,19 @@ Sound name stop
 Sound name volume #
 	Functions just as the volume change in music, just substitute Sound and a proper name
 	ex: Sonud zap volume .2
+
+Options
+	Will start the dialog buttons creation with each following line until /Options being a button
+
+x y h w n
+v
+	Will create a dialog button with the coordinates of x,y and a height of h and width of w. The name is simply the caller id for the
+	button and won't be visible. The v value is for the string to be displayed inside the button and is on the line below the coordinate data.
+	ex: 120 320 40 40 Q1
+            No, I wouldn't want to do that
+
+/Options
+	Ends the creation of dialog buttons, if statement should go after (later)
 
 --Conf (Need a second call of this to go back to normal text)
 

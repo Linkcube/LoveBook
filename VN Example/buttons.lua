@@ -1,11 +1,12 @@
 ButtonClass = class("ButtonClass")
 
-function ButtonClass:initialize(X, Y, W, H, N)
+function ButtonClass:initialize(X, Y, W, H, N, V)
 	self.x = X or 0
 	self.y = Y or 0
 	self.width = W or 0
 	self.height = H or 0
 	self.name = N or ""
+	self.value = V or ""
 	self.color = {255, 0, 255}
 end
 
@@ -18,9 +19,16 @@ function ButtonClass:Contact(X, Y)
 	return false
 end
 
-function ButtonClass:Draw()
-	love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
-	love.graphics.print(self.name, self.x, self.y)
+function ButtonClass:Draw() -- draw an empty box with text inside it
+	local tmptable = {
+		self.x, self.y,
+		self.x + self.width, self.y,
+		self.x + self.width, self.y + self.height,
+		self.x, self.y + self.height,
+		self.x, self.y
+	}
+	love.graphics.line(tmptable)
+	love.graphics.print(self.v, self.x + 2, self.y + self.height/2)
 end
 
 --------------------------------------------------------------------------

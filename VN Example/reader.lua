@@ -42,9 +42,9 @@ sounds = {} -- The table of sounds to be played
 local inpt = true -- Whether the user input will be taken into account
 local toFade = {} -- The table of characters to fade alpha values
 local toShow = {} -- The table of characters to fade in alpha values
-local voiceTable = {} -- The table of sound files dedicated to voices
-local voicePos = 1 -- The voice file of voiceTable to play
-local voicePlay = false -- Whether voice files should be played or not
+voiceTable = {} -- The table of sound files dedicated to voices
+voicePos = 1 -- The voice file of voiceTable to play
+voicePlay = false -- Whether voice files should be played or not
 local sX = 1 -- The scale coefficient of the x-dimension of the background
 local sY = 1 -- The scale coefficient of the y-dimension of the background
 local click = 0 -- Click progression the player is at
@@ -214,6 +214,19 @@ function Reader:computeScript()
 			elseif lineS[2] == "volume" then
 				musics[lineS[1]]:setVolume(tonumber(lineS[3]))
 			end
+		-- Options
+		elseif lineS[0] == "Options" then
+			dButtons.buttons = {}
+			Line = cLine + 1
+			while line[cLine] ~= "/Options" do
+				lineS = Reader:lineSplit(line[cLine])
+				local tmpName = lineS[4]
+				local tmpButtonData = {tonumber(lineS[0]), tonumber(lineS[1]), tonumber(lineS[2]), tonumber(lineS[3]), lineS[4]}
+				cLine = cLine + 1
+				dButtons.buttons[tmpName] =  ButtonClass:new(tmpButtonData, line[cLine])
+				cLine = cLine + 1
+			end
+			GameStates:Push(dButtons)
 		end
 		cLine = cLine + 1
 	end
@@ -261,10 +274,9 @@ function Reader:Load()
 		elseif lineS[0] == "setTitle" then
 			love.window.setTitle(string.sub(ls, 10))
 		-- Sound
-			--love.window.setTitle(string.sub(ls, 12, 0))
 		elseif lineS[0] == "Sound" then
-		-- Music
 			sounds[lineS[1]] = love.audio.newSource(lineS[2], "static")
+		-- Music
 		elseif lineS[0] == "Music" then
 			musics[lineS[1]] = love.audio.newSource(lineS[2], "stream")
 			musics[lineS[1]]:setLooping(true)
@@ -279,6 +291,9 @@ function Reader:Load()
 			end
 			voicePlay = true
 			voicePos = 1
+		-- Window Icon
+		elseif lineS[0] == "setIcon" then
+			success = love.window.setIcon(lineS[1])
 		end
 	end
 	width, height = love.graphics.getDimensions()
@@ -382,6 +397,9 @@ function Reader:Click(x, y, button)
 			end
 		end
 	end
+end
+
+function Reader:KeyPress(key, isrepeat)
 end
 
 function Reader:Draw()

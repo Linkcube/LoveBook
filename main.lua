@@ -19,9 +19,12 @@ function love.keypressed(key, isrepeat) -- Clean restart, clears all assets
 		love.audio.stop()
 		GameStates:Pop()
 		package.loaded.states = nil
-		states = require "states"
+		states = require('states')
+		GameStates = GameStatesClass:new()
 		GameStates:Push(Reader)
 		GameStates:Push(Menu)
+	else
+		GameStates.states[GameStates.current]:KeyPress(key, isrepeat) -- pass through if not reset
 	end
 end
 	

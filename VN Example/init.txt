@@ -1,6 +1,7 @@
 -- Initialize game assets
 setResolution 1024 720
 setTitle VN Test
+setIco char.png
 Character Bill char.png
 Background bg1 bg1.png
 Character Bill addPose flip revChar.png

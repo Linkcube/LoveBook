@@ -9,18 +9,18 @@ Text wrapping [x]
 Font support [x]
 Progressive text [x]
 Scale Backgrounds [x]
+Speech stack [x]
 
 ##Bugged/Partly working##
-Speech stack [x] # got the load in, called voiceTable, not tested
-Menu/State system [] # further functionality and programability to be added
+Menu/State system [x] # further functionality and programability to be added
 
 ##Not done##
 Standardising []
-Automatic playing []
-Save/Load []
+Automatic playing [] # can begin development soon
+Save/Load [] # can begin development soon
 Shaders [?]
-Slide move []
-Advanced commands []
-In-game options []
+Slide move [] # should be done by now
+Advanced commands [] # may just have deeper documentation, and cleaner code
+In-game options [] # can begin development soon
 Multiple paths []
-UI, alternate text and color schemes []
+UI, alternate text and color schemes [] # can begin development soon

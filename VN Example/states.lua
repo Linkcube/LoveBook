@@ -1,6 +1,7 @@
 class = require("sunclass") -- try out using sunclass from 'qwook'
 reader = require('reader')
 menu = require('menu')
+dialogButtons = require('dialogButtons')
 buttons = require('buttons')
 GameStatesClass = class("GameStatesClass")
 
