@@ -12,8 +12,8 @@ function Menu:Click(x, y, button)
 					for key, val in pairs(musics) do
 						if val:isPaused() then val:resume() end
 					end
-					if voicePlay then
-						voiceTable[voicePos]:resume()
+					if voicePlay and voicePos > 1 then
+						voiceTable[voicePos-1]:resume()
 					end
 					GameStates:Pop()
 				end
@@ -68,7 +68,7 @@ function Menu:Load()
 	for k, v in pairs(musics) do
 		if v:isPlaying() then v:pause() end
 	end
-	if voicePlay == true then
-		if voiceTable[voicePos]:isPlaying() then voiceTable[voicePos]:pause() end
+	if voicePlay and voicePos > 1 then
+		if voiceTable[voicePos-1]:isPlaying() then voiceTable[voicePos-1]:pause() end
 	end
 end
