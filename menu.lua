@@ -5,17 +5,17 @@ function Menu:Click(x, y, button)
 	if button == 'l' then
 		for k, v in pairs(Menu.buttons) do
 			if v:Contact(x, y) then
-				if v.name == "Start" then
+				if v.name == "Start" then -- Prepare to remove the menu state from the state stack
 					for key, val in pairs(sounds) do
 						if val:isPaused() then val:resume() end
 					end
 					for key, val in pairs(musics) do
 						if val:isPaused() then val:resume() end
 					end
-					if voicePlay and voicePos > 1 then
+					if voicePlay and voiceTable[voicePos-1] ~= nil then
 						voiceTable[voicePos-1]:resume()
 					end
-					GameStates:Pop()
+					GameStates:Pop() -- Remove the menu state
 				end
 			end
 		end
@@ -68,7 +68,7 @@ function Menu:Load()
 	for k, v in pairs(musics) do
 		if v:isPlaying() then v:pause() end
 	end
-	if voicePlay and voicePos > 1 then
+	if voicePlay and voiceTable[voicePos-1] ~= nil then
 		if voiceTable[voicePos-1]:isPlaying() then voiceTable[voicePos-1]:pause() end
 	end
 end
