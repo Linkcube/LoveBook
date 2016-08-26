@@ -1,3 +1,5 @@
+![](https://pbs.twimg.com/profile_images/3077919408/2766795e81dad77bb276e548af0c42bd.jpeg)
+
 These files are for the project "LoveBook", which is designed to be a visual novel engine running on love2d.
 
 Included in the github repository are the following files:
