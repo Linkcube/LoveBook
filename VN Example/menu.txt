@@ -1,3 +1,0 @@
-Click on the left one to start/return to the game!
-Button add 200 160 Hi char.png
-Button add 80 160 Start revChar.png
